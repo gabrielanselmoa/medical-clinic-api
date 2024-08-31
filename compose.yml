@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres
+    container_name: psql-rt
+    restart: always
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5433:5432"
+    networks:
+      - back-tier
+
+networks:
+  back-tier:
+    driver: bridge
