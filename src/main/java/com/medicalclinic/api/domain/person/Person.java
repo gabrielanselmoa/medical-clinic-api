@@ -32,25 +32,17 @@ public class Person {
     public Person() {
     }
 
-    public Person(String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg) {
-        this.name = name;
-        this.birthdayDate = birthdayDate;
-        this.sexType = sexType;
-        this.email = email;
-        this.password = password;
-        this.cpf = cpf;
-        this.rg = rg;
-    }
-
-    public Person(String name, Date birthdayDate, Sex sexType, String email, String cpf, String rg, String password, Long id) {
-        this.name = name;
-        this.birthdayDate = birthdayDate;
-        this.sexType = sexType;
-        this.email = email;
-        this.cpf = cpf;
-        this.rg = rg;
-        this.password = password;
+    public Person(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, Address address, Phone phone) {
         this.id = id;
+        this.name = name;
+        this.birthdayDate = birthdayDate;
+        this.sexType = sexType;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.address = address;
+        this.phone = phone;
     }
 
     public Long getId() {
@@ -115,6 +107,22 @@ public class Person {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 
     @Override
