@@ -1,9 +1,14 @@
 package com.medicalclinic.api.services;
 
+import com.medicalclinic.api.controllers.exceptions.EntityNotFoundException;
+import com.medicalclinic.api.domain.phone.Phone;
 import com.medicalclinic.api.repositories.PatientRepository;
 import com.medicalclinic.api.repositories.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PhoneService {
@@ -13,5 +18,14 @@ public class PhoneService {
     @Autowired
     public PhoneService(PhoneRepository repository) {
         this.repository = repository;
+    }
+
+    public List<Phone> findAll(){
+        return repository.findAll();
+    }
+
+    public Phone findById(Long id){
+        Optional<Phone> phone = repository.findById(id);
+        return phone.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
     }
 }

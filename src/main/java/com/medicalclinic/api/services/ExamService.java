@@ -1,8 +1,13 @@
 package com.medicalclinic.api.services;
 
+import com.medicalclinic.api.controllers.exceptions.EntityNotFoundException;
+import com.medicalclinic.api.domain.exam.Exam;
 import com.medicalclinic.api.repositories.ExamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ExamService {
@@ -12,5 +17,14 @@ public class ExamService {
     @Autowired
     public ExamService(ExamRepository repository) {
         this.repository = repository;
+    }
+
+    public List<Exam> findAll(){
+        return repository.findAll();
+    }
+
+    public Exam findById(Long id){
+        Optional<Exam> exam = repository.findById(id);
+        return exam.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
     }
 }

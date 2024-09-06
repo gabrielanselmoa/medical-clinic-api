@@ -1,6 +1,5 @@
 package com.medicalclinic.api.controllers;
 
-import com.medicalclinic.api.services.AdressService;
 import com.medicalclinic.api.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
