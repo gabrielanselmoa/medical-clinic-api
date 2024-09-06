@@ -1,8 +1,10 @@
 package com.medicalclinic.api.domain.doctor;
 
+import com.medicalclinic.api.domain.address.Address;
 import com.medicalclinic.api.domain.appointment.Appointment;
 import com.medicalclinic.api.domain.patient.Sex;
 import com.medicalclinic.api.domain.person.Person;
+import com.medicalclinic.api.domain.phone.Phone;
 import com.medicalclinic.api.domain.specialty.Specialty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -27,8 +29,8 @@ public class Doctor extends Person {
     public Doctor() {
     }
 
-    public Doctor(String name, Date birthdayDate, Sex sexType, String email, String cpf, String rg, String password, Long id, String crm, Set<Appointment> appointments, Specialty specialty) {
-        super(name, birthdayDate, sexType, email, cpf, rg, password, id);
+    public Doctor(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, Address address, Phone phone, String crm, Set<Appointment> appointments, Specialty specialty) {
+        super(id, name, birthdayDate, sexType, email, password, cpf, rg, address, phone);
         this.crm = crm;
         this.appointments = appointments;
         this.specialty = specialty;
