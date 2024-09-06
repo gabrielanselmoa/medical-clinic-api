@@ -2,12 +2,10 @@ package com.medicalclinic.api.services;
 
 import com.medicalclinic.api.controllers.exceptions.EntityNotFoundException;
 import com.medicalclinic.api.domain.phone.Phone;
-import com.medicalclinic.api.repositories.PatientRepository;
 import com.medicalclinic.api.repositories.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
