@@ -20,10 +20,6 @@ public class AttendantService {
         this.repository = repository;
     }
 
-    public List<Attendant> findAll(){
-        return repository.findAll();
-    }
-
     public Attendant findById(Long id){
         Optional<Attendant> attendant = repository.findById(id);
         return attendant.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

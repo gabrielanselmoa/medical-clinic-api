@@ -19,10 +19,6 @@ public class ExamService {
         this.repository = repository;
     }
 
-    public List<Exam> findAll(){
-        return repository.findAll();
-    }
-
     public Exam findById(Long id){
         Optional<Exam> exam = repository.findById(id);
         return exam.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

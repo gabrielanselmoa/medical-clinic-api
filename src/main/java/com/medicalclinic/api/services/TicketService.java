@@ -21,10 +21,6 @@ public class TicketService {
         this.repository = repository;
     }
 
-    public List<Ticket> findAll(){
-        return repository.findAll();
-    }
-
     public Ticket findById(UUID id){
         Optional<Ticket> address = repository.findById(id);
         return address.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

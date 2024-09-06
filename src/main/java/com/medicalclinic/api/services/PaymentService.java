@@ -21,10 +21,6 @@ public class PaymentService {
         this.repository = repository;
     }
 
-    public List<Payment> findAll(){
-        return repository.findAll();
-    }
-
     public Payment findById(UUID id){
         Optional<Payment> payment = repository.findById(id);
         return payment.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

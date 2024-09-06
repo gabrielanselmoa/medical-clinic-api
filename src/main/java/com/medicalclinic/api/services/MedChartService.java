@@ -20,10 +20,6 @@ public class MedChartService {
         this.repository = repository;
     }
 
-    public List<MedChart> findAll(){
-        return repository.findAll();
-    }
-
     public MedChart findById(Long id){
         Optional<MedChart> medChart = repository.findById(id);
         return medChart.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

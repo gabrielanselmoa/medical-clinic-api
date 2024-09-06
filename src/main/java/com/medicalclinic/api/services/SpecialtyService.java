@@ -20,10 +20,6 @@ public class SpecialtyService {
         this.repository = repository;
     }
 
-    public List<Specialty> findAll(){
-        return repository.findAll();
-    }
-
     public Specialty findById(Long id){
         Optional<Specialty> specialty = repository.findById(id);
         return specialty.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

@@ -19,10 +19,6 @@ public class AddressService {
         this.repository = repository;
     }
 
-    public List<Address> findAll(){
-        return repository.findAll();
-    }
-
     public Address findById(Long id){
         Optional<Address> address = repository.findById(id);
         return address.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

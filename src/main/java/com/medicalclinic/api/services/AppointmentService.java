@@ -21,10 +21,6 @@ public class AppointmentService {
         this.repository = repository;
     }
 
-    public List<Appointment> findAll(){
-        return repository.findAll();
-    }
-
     public Appointment findById(Long id){
         Optional<Appointment> appointment = repository.findById(id);
         return appointment.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

@@ -19,10 +19,6 @@ public class PersonService {
         this.repository = repository;
     }
 
-    public List<Person> findAll(){
-        return repository.findAll();
-    }
-
     public Person findById(Long id){
         Optional<Person> person = repository.findById(id);
         return person.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

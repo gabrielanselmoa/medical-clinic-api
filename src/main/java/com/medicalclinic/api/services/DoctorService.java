@@ -20,10 +20,6 @@ public class DoctorService {
         this.repository = repository;
     }
 
-    public List<Doctor> findAll(){
-        return repository.findAll();
-    }
-
     public Doctor findById(Long id){
         Optional<Doctor> doctor = repository.findById(id);
         return doctor.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

@@ -20,10 +20,6 @@ public class PatientService {
         this.repository = repository;
     }
 
-    public List<Patient> findAll(){
-        return repository.findAll();
-    }
-
     public Patient findById(Long id){
         Optional<Patient> patient = repository.findById(id);
         return patient.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));

@@ -20,12 +20,6 @@ public class AddressController {
         this.service = service;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Address>> findAll(){
-        List<Address> list = service.findAll();
-        return ResponseEntity.ok().body(list);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Address> findById(@PathVariable Long id) {
         Address obj = service.findById(id);

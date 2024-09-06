@@ -20,10 +20,6 @@ public class PhoneService {
         this.repository = repository;
     }
 
-    public List<Phone> findAll(){
-        return repository.findAll();
-    }
-
     public Phone findById(Long id){
         Optional<Phone> phone = repository.findById(id);
         return phone.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
