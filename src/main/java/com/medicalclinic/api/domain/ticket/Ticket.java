@@ -1,12 +1,10 @@
 package com.medicalclinic.api.domain.ticket;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,7 +15,7 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private Instant created_at = Instant.now();
+    private Instant created_at;
 
     private LocalDate expire_in;
 
@@ -44,6 +42,15 @@ public class Ticket {
 
     public void setCreated_at(Instant created_at) {
         this.created_at = created_at;
+    }
+
+    @PrePersist
+    public void setInstant() {
+        Instant now = Instant.now();
+        setCreated_at(now);
+
+        Instant expireAt = now.plus(5, java.time.temporal.ChronoUnit.HOURS);
+        setExpire_in(expireAt.atZone(ZoneId.systemDefault()).toLocalDate());
     }
 
     public LocalDate getExpire_in() {

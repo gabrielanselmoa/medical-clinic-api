@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class DoctorResponseDTO {
 
+    private Long id;
     private String name;
     private Date birthdayDate;
     private Sex sexType;
@@ -24,7 +25,8 @@ public class DoctorResponseDTO {
 
     public DoctorResponseDTO(){}
 
-    public DoctorResponseDTO(String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, String crm) {
+    public DoctorResponseDTO(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, String crm) {
+        this.id = id;
         this.name = name;
         this.birthdayDate = birthdayDate;
         this.sexType = sexType;
@@ -35,7 +37,23 @@ public class DoctorResponseDTO {
         this.crm = crm;
     }
 
+    public DoctorResponseDTO(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, String crm, AddressDTO address, PhoneDTO phone, SpecialtyDTO specialty) {
+        this.id = id;
+        this.name = name;
+        this.birthdayDate = birthdayDate;
+        this.sexType = sexType;
+        this.email = email;
+        this.password = password;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.crm = crm;
+        this.address = address;
+        this.phone = phone;
+        this.specialty = specialty;
+    }
+
     public DoctorResponseDTO(Doctor doctor){
+        this.id = doctor.getId();
         this.name = doctor.getName();
         this.birthdayDate = doctor.getBirthdayDate();
         this.sexType = doctor.getSexType();
@@ -47,6 +65,14 @@ public class DoctorResponseDTO {
         this.address = new AddressDTO(doctor.getAddress());
         this.phone = new PhoneDTO(doctor.getPhone());
         this.specialty = new SpecialtyDTO(doctor.getSpecialty());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

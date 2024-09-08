@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class PatientResponseDTO {
 
+    private Long id;
     private String name;
     private Date birthdayDate;
     private Sex sexType;
@@ -20,7 +21,8 @@ public class PatientResponseDTO {
 
     public PatientResponseDTO(){}
 
-    public PatientResponseDTO(String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg) {
+    public PatientResponseDTO(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg) {
+        this.id = id;
         this.name = name;
         this.birthdayDate = birthdayDate;
         this.sexType = sexType;
@@ -29,7 +31,9 @@ public class PatientResponseDTO {
         this.cpf = cpf;
         this.rg = rg;
     }
+
     public PatientResponseDTO(Patient patient){
+        this.id = patient.getId();
         this.name = patient.getName();
         this.birthdayDate = patient.getBirthdayDate();
         this.sexType = patient.getSexType();
@@ -39,6 +43,14 @@ public class PatientResponseDTO {
         this.rg = patient.getRg();
         this.address = new AddressDTO(patient.getAddress());
         this.phone = new PhoneDTO(patient.getPhone());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -45,6 +45,7 @@ public class PersonService {
         Attendant attendant = (Attendant) personRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Attendant not found!"));
         return new AttendantResponseDTO(attendant);
     }
+
     public DoctorResponseDTO createDoctor(DoctorRequestDTO dto) {
         var doctor = new Doctor();
 

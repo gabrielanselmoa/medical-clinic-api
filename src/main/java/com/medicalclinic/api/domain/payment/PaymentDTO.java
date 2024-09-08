@@ -1,35 +1,39 @@
 package com.medicalclinic.api.domain.payment;
 
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.math.BigDecimal;
-import java.util.Objects;
 import java.util.UUID;
 
-@Entity
-public class Payment {
+public class PaymentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String type;
     private BigDecimal total;
     private BigDecimal subTotal;
     private BigDecimal discount;
 
-    @Enumerated(EnumType.STRING)
     private PaymentStatus status;
 
-    public Payment() {
-    }
+    public PaymentDTO(){}
 
-    public Payment(UUID id, String type, BigDecimal total, BigDecimal subTotal, BigDecimal discount, PaymentStatus status) {
+    public PaymentDTO(UUID id, String type, BigDecimal total, BigDecimal subTotal, BigDecimal discount, PaymentStatus status) {
         this.id = id;
         this.type = type;
         this.total = total;
         this.subTotal = subTotal;
         this.discount = discount;
         this.status = status;
+    }
+
+    public PaymentDTO(Payment payment) {
+        this.id = payment.getId();
+        this.type = payment.getType();
+        this.total = payment.getTotal();
+        this.subTotal = payment.getSubTotal();
+        this.discount = payment.getDiscount();
+        this.status = payment.getStatus();
     }
 
     public UUID getId() {
@@ -78,18 +82,5 @@ public class Payment {
 
     public void setStatus(PaymentStatus status) {
         this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Payment payment = (Payment) o;
-        return Objects.equals(id, payment.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 }

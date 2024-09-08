@@ -8,6 +8,7 @@ import java.util.Date;
 
 public class AttendantResponseDTO {
 
+    private Long id;
     private String name;
     private Date birthdayDate;
     private Sex sexType;
@@ -22,7 +23,8 @@ public class AttendantResponseDTO {
 
     public AttendantResponseDTO(){}
 
-    public AttendantResponseDTO(String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, String sectorNumber, AddressDTO address, PhoneDTO phone) {
+    public AttendantResponseDTO(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, String sectorNumber, AddressDTO address, PhoneDTO phone) {
+        this.id = id;
         this.name = name;
         this.birthdayDate = birthdayDate;
         this.sexType = sexType;
@@ -36,6 +38,7 @@ public class AttendantResponseDTO {
     }
 
     public AttendantResponseDTO(Attendant attendant){
+        this.id = attendant.getId();
         this.name = attendant.getName();
         this.birthdayDate = attendant.getBirthdayDate();
         this.sexType = attendant.getSexType();
@@ -48,10 +51,17 @@ public class AttendantResponseDTO {
         this.phone = new PhoneDTO(attendant.getPhone());
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }

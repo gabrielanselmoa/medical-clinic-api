@@ -43,7 +43,6 @@ public class Appointment {
     @OneToMany
     private Set<Exam> exams = new HashSet<>();
 
-
     public Appointment() {
     }
 
