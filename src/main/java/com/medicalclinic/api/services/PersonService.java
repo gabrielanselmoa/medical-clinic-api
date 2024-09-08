@@ -69,7 +69,9 @@ public class PersonService {
         doctor.setPhone(phoneSaved);
         doctor.setSpecialty(specialty);
 
-        return new DoctorResponseDTO(doctor);
+        var doctorSaved = personRepository.save(doctor);
+
+        return new DoctorResponseDTO(doctorSaved);
     }
 
     private Address createAddress(AddressDTO dto) {
@@ -103,7 +105,9 @@ public class PersonService {
         patient.setAddress(addressSaved);
         patient.setPhone(phoneSaved);
 
-        return new PatientResponseDTO(patient);
+        var patientSaved = personRepository.save(patient);
+
+        return new PatientResponseDTO(patientSaved);
     }
 
     public AttendantResponseDTO createAttendant(AttendantRequestDTO dto) {
@@ -125,6 +129,8 @@ public class PersonService {
         attendant.setAddress(addressSaved);
         attendant.setPhone(phoneSaved);
 
-        return new AttendantResponseDTO(attendant);
+        var attendantSaved = personRepository.save(attendant);
+
+        return new AttendantResponseDTO(attendantSaved);
     }
 }

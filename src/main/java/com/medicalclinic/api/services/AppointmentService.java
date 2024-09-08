@@ -24,12 +24,14 @@ public class AppointmentService {
     private AppointmentRepository repository;
     private PersonRepository personRepository;
     private TicketRepository ticketRepository;
+    private PaymentRepository paymentRepository;
 
     @Autowired
-    public AppointmentService(AppointmentRepository repository, PersonRepository personRepository, TicketRepository ticketRepository) {
+    public AppointmentService(AppointmentRepository repository, PersonRepository personRepository, TicketRepository ticketRepository, PaymentRepository paymentRepository) {
         this.repository = repository;
         this.personRepository = personRepository;
         this.ticketRepository = ticketRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     public Appointment findById(Long id){
@@ -44,6 +46,7 @@ public class AppointmentService {
         var doctor = (Doctor) personRepository.findById(dto.getDoctorId()).orElseThrow(() -> new EntityNotFoundException("Doctor not found!"));
 
         var payment = new Payment();
+        var paymentSaved = paymentRepository.save(payment);
 
         var ticket = new Ticket();
         var ticketSaved = ticketRepository.save(ticket);
@@ -53,7 +56,7 @@ public class AppointmentService {
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);
         appointment.setTicket(ticketSaved);
-        appointment.setPayment(payment);
+        appointment.setPayment(paymentSaved);
 
         return new AppointmentResponseDTO(appointment);
     }
