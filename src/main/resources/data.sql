@@ -57,3 +57,5 @@ INSERT INTO Appointment (id, date, description, patient_id, doctor_id, med_chart
 VALUES
     (1, '2024-09-01', 'Routine checkup', 2, 1, 1, 'f47ac10b-58cc-4372-a567-0e02b2c3d479', 'd42b40e3-3c22-4e09-8a0c-6f55d1bfe9bb'),
     (2, '2024-09-02', 'Follow-up visit', 3, 1, 2, 'e09b41a4-3f1f-4e36-946d-540c3e6f91b1', 'b7c9e5f2-6d29-42d8-b3a6-8b885c9e2d0a');
+
+INSERT INTO Specialty (id, name) VALUES (1, 'Dermatologist'), (2, 'Dentist');

@@ -6,7 +6,7 @@ import com.medicalclinic.api.domain.phone.PhoneDTO;
 
 import java.util.Date;
 
-public class DoctorCreateDTO {
+public class DoctorRequestDTO {
 
     private String name;
     private Date birthdayDate;
@@ -15,13 +15,15 @@ public class DoctorCreateDTO {
     private String password;
     private String cpf;
     private String rg;
+    private String crm;
 
     private AddressDTO address;
     private PhoneDTO phone;
+    private Long specialtyId;
 
-    public DoctorCreateDTO(){}
+    public DoctorRequestDTO(){}
 
-    public DoctorCreateDTO(String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, AddressDTO address, PhoneDTO phone) {
+    public DoctorRequestDTO(String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, String crm, AddressDTO address, PhoneDTO phone, Long specialtyId) {
         this.name = name;
         this.birthdayDate = birthdayDate;
         this.sexType = sexType;
@@ -29,20 +31,10 @@ public class DoctorCreateDTO {
         this.password = password;
         this.cpf = cpf;
         this.rg = rg;
+        this.crm = crm;
         this.address = address;
         this.phone = phone;
-    }
-
-    public DoctorCreateDTO(Doctor doctor){
-        this.name = doctor.getName();
-        this.birthdayDate = doctor.getBirthdayDate();
-        this.sexType = doctor.getSexType();
-        this.email = doctor.getEmail();
-        this.password = doctor.getPassword();
-        this.cpf = doctor.getCpf();
-        this.rg = doctor.getRg();
-        this.address = new AddressDTO(doctor.getAddress());
-        this.phone = new PhoneDTO(doctor.getPhone());
+        this.specialtyId = specialtyId;
     }
 
     public String getName() {
@@ -101,6 +93,14 @@ public class DoctorCreateDTO {
         this.rg = rg;
     }
 
+    public String getCrm() {
+        return crm;
+    }
+
+    public void setCrm(String crm) {
+        this.crm = crm;
+    }
+
     public AddressDTO getAddress() {
         return address;
     }
@@ -115,5 +115,13 @@ public class DoctorCreateDTO {
 
     public void setPhone(PhoneDTO phone) {
         this.phone = phone;
+    }
+
+    public Long getSpecialtyId() {
+        return specialtyId;
+    }
+
+    public void setSpecialtyId(Long specialtyId) {
+        this.specialtyId = specialtyId;
     }
 }

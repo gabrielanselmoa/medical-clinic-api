@@ -1,7 +1,9 @@
 package com.medicalclinic.api.domain.attendant;
 
+import com.medicalclinic.api.domain.address.Address;
 import com.medicalclinic.api.domain.patient.Sex;
 import com.medicalclinic.api.domain.person.Person;
+import com.medicalclinic.api.domain.phone.Phone;
 import jakarta.persistence.Entity;
 
 import java.util.Date;
@@ -15,8 +17,8 @@ public class Attendant extends Person {
     public Attendant() {
     }
 
-    public Attendant(String name, Date birthdayDate, Sex sexType, String email, String cpf, String rg, String password, Long id, String sectorNumber) {
-        super(name, birthdayDate, sexType, email, cpf, rg, password, id);
+    public Attendant(Long id, String name, Date birthdayDate, Sex sexType, String email, String password, String cpf, String rg, Address address, Phone phone, String sectorNumber) {
+        super(id, name, birthdayDate, sexType, email, password, cpf, rg, address, phone);
         this.sectorNumber = sectorNumber;
     }
 
