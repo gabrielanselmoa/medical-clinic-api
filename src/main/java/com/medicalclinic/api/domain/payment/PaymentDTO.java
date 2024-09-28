@@ -10,29 +10,29 @@ public class PaymentDTO {
 
     private UUID id;
     private String type;
-    private BigDecimal total;
     private BigDecimal subTotal;
     private BigDecimal discount;
+    private BigDecimal total;
 
     private PaymentStatus status;
 
     public PaymentDTO(){}
 
-    public PaymentDTO(UUID id, String type, BigDecimal total, BigDecimal subTotal, BigDecimal discount, PaymentStatus status) {
+    public PaymentDTO(UUID id, String type, BigDecimal subTotal, BigDecimal discount, BigDecimal total, PaymentStatus status) {
         this.id = id;
         this.type = type;
-        this.total = total;
         this.subTotal = subTotal;
         this.discount = discount;
+        this.total = total;
         this.status = status;
     }
 
     public PaymentDTO(Payment payment) {
         this.id = payment.getId();
         this.type = payment.getType();
-        this.total = payment.getTotal();
         this.subTotal = payment.getSubTotal();
         this.discount = payment.getDiscount();
+        this.total = payment.getTotal();
         this.status = payment.getStatus();
     }
 
@@ -52,14 +52,6 @@ public class PaymentDTO {
         this.type = type;
     }
 
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
     public BigDecimal getSubTotal() {
         return subTotal;
     }
@@ -74,6 +66,14 @@ public class PaymentDTO {
 
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
     public PaymentStatus getStatus() {

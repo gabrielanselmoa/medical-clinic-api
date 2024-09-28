@@ -1,8 +1,8 @@
 package com.medicalclinic.api.services;
 
-import com.medicalclinic.api.controllers.exceptions.EntityNotFoundException;
 import com.medicalclinic.api.domain.exam.Exam;
 import com.medicalclinic.api.repositories.ExamRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

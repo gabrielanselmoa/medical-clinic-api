@@ -2,6 +2,7 @@ package com.medicalclinic.api.services;
 
 import com.medicalclinic.api.domain.address.Address;
 import com.medicalclinic.api.domain.appointment.Appointment;
+import com.medicalclinic.api.domain.appointment.AppointmentPatientTicketActive;
 import com.medicalclinic.api.domain.appointment.AppointmentRequestDTO;
 import com.medicalclinic.api.domain.appointment.AppointmentResponseDTO;
 import com.medicalclinic.api.domain.doctor.Doctor;
@@ -59,5 +60,14 @@ public class AppointmentService {
         appointment.setPayment(paymentSaved);
 
         return new AppointmentResponseDTO(appointment);
+    }
+
+    public List<AppointmentPatientTicketActive>  findAllAppointmentsWithActiveTickets() {
+
+        List<Appointment> appointments = repository.findAllAppointmentsWithActiveTickets();
+
+        return appointments.stream()
+                .map(AppointmentPatientTicketActive::new)
+                .toList();
     }
 }

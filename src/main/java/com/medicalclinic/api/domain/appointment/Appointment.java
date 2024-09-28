@@ -1,5 +1,6 @@
 package com.medicalclinic.api.domain.appointment;
 
+import com.medicalclinic.api.domain.attendant.Attendant;
 import com.medicalclinic.api.domain.doctor.Doctor;
 import com.medicalclinic.api.domain.exam.Exam;
 import com.medicalclinic.api.domain.medChart.MedChart;
@@ -24,11 +25,14 @@ public class Appointment {
 
     private String description;
 
-    @OneToOne
+    @ManyToOne
     private Patient patient;
 
     @ManyToOne
     private Doctor doctor;
+
+    @ManyToOne
+    private Attendant attendant;
 
     @OneToOne
     @JoinColumn(name = "med_chart_id")
@@ -46,12 +50,13 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(Long id, LocalDate date, String description, Patient patient, Doctor doctor, MedChart medChart, Ticket ticket, Payment payment, Set<Exam> exams) {
+    public Appointment(Long id, LocalDate date, String description, Patient patient, Doctor doctor, Attendant attendant, MedChart medChart, Ticket ticket, Payment payment, Set<Exam> exams) {
         this.id = id;
         this.date = date;
         this.description = description;
         this.patient = patient;
         this.doctor = doctor;
+        this.attendant = attendant;
         this.medChart = medChart;
         this.ticket = ticket;
         this.payment = payment;
@@ -66,20 +71,20 @@ public class Appointment {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public LocalDate getDate() {
         return date;
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Patient getPatient() {
@@ -98,20 +103,20 @@ public class Appointment {
         this.doctor = doctor;
     }
 
+    public Attendant getAttendant() {
+        return attendant;
+    }
+
+    public void setAttendant(Attendant attendant) {
+        this.attendant = attendant;
+    }
+
     public MedChart getMedChart() {
         return medChart;
     }
 
     public void setMedChart(MedChart medChart) {
         this.medChart = medChart;
-    }
-
-    public Set<Exam> getExams() {
-        return exams;
-    }
-
-    public void setExams(Set<Exam> exams) {
-        this.exams = exams;
     }
 
     public Ticket getTicket() {
@@ -129,6 +134,11 @@ public class Appointment {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
+
+    public Set<Exam> getExams() {
+        return exams;
+    }
+
 
     @Override
     public boolean equals(Object o) {

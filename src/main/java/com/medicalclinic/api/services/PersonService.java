@@ -1,6 +1,5 @@
 package com.medicalclinic.api.services;
 
-import com.medicalclinic.api.controllers.exceptions.EntityNotFoundException;
 import com.medicalclinic.api.domain.address.Address;
 import com.medicalclinic.api.domain.address.AddressDTO;
 import com.medicalclinic.api.domain.attendant.Attendant;
@@ -12,13 +11,13 @@ import com.medicalclinic.api.domain.doctor.DoctorResponseDTO;
 import com.medicalclinic.api.domain.patient.Patient;
 import com.medicalclinic.api.domain.patient.PatientRequestDTO;
 import com.medicalclinic.api.domain.patient.PatientResponseDTO;
-import com.medicalclinic.api.domain.person.Person;
 import com.medicalclinic.api.domain.phone.Phone;
 import com.medicalclinic.api.domain.phone.PhoneDTO;
 import com.medicalclinic.api.repositories.AddressRepository;
 import com.medicalclinic.api.repositories.PersonRepository;
 import com.medicalclinic.api.repositories.PhoneRepository;
 import com.medicalclinic.api.repositories.SpecialtyRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

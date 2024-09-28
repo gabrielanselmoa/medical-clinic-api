@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres
-    container_name: psql-rt
+    container_name: psql-rb
     restart: always
     environment:
       POSTGRES_DB: demo
