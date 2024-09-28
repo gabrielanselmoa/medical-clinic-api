@@ -2,7 +2,6 @@ package com.medicalclinic.api.services;
 
 import com.medicalclinic.api.domain.address.Address;
 import com.medicalclinic.api.repositories.AddressRepository;
-import com.medicalclinic.api.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,12 +18,12 @@ public class Ticket {
 
     private Instant created_at;
 
-    private LocalDate expire_in;
+    private Instant expire_in;
 
     public Ticket() {
     }
 
-    public Ticket(UUID id, Instant created_at, LocalDate expire_in) {
+    public Ticket(UUID id, Instant created_at, Instant expire_in) {
         this.id = id;
         this.created_at = created_at;
         this.expire_in = expire_in;
@@ -50,16 +51,25 @@ public class Ticket {
         setCreated_at(now);
 
         Instant expireAt = now.plus(5, java.time.temporal.ChronoUnit.HOURS);
-        setExpire_in(expireAt.atZone(ZoneId.systemDefault()).toLocalDate());
+        setExpire_in(expireAt);
     }
 
-    public LocalDate getExpire_in() {
+    public Instant getExpire_in() {
         return expire_in;
     }
 
-    public void setExpire_in(LocalDate expire_in) {
+    public void setExpire_in(Instant expire_in) {
         this.expire_in = expire_in;
     }
+
+    public Integer getCreatedAtLocal() {
+        return ZonedDateTime.ofInstant(created_at, ZoneId.of("America/Sao_Paulo")).getHour();
+    }
+
+    public Integer getExpireInLocal() {
+        return ZonedDateTime.ofInstant(expire_in, ZoneId.of("America/Sao_Paulo")).getHour();
+    }
+
 
     @Override
     public boolean equals(Object o) {

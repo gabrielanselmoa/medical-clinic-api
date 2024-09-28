@@ -6,10 +6,7 @@ import com.medicalclinic.api.domain.patient.Sex;
 import com.medicalclinic.api.domain.person.Person;
 import com.medicalclinic.api.domain.phone.Phone;
 import com.medicalclinic.api.domain.specialty.Specialty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,7 +17,7 @@ public class Doctor extends Person {
 
     private String crm;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private Set<Appointment> appointments = new HashSet<>();
 
     @ManyToOne
