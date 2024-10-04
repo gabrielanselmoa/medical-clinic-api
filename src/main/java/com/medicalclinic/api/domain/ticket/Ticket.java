@@ -6,6 +6,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -62,12 +63,16 @@ public class Ticket {
         this.expire_in = expire_in;
     }
 
-    public Integer getCreatedAtLocal() {
-        return ZonedDateTime.ofInstant(created_at, ZoneId.of("America/Sao_Paulo")).getHour();
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+    public String getFormattedCreatedAt() {
+        ZonedDateTime createdAtZoned = ZonedDateTime.ofInstant(created_at, ZoneId.of("America/Sao_Paulo"));
+        return createdAtZoned.format(formatter);
     }
 
-    public Integer getExpireInLocal() {
-        return ZonedDateTime.ofInstant(expire_in, ZoneId.of("America/Sao_Paulo")).getHour();
+    public String getFormattedExpireIn() {
+        ZonedDateTime expireInZoned = ZonedDateTime.ofInstant(expire_in, ZoneId.of("America/Sao_Paulo"));
+        return expireInZoned.format(formatter);
     }
 
 

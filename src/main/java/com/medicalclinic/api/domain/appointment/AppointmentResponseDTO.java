@@ -44,7 +44,7 @@ public class AppointmentResponseDTO {
         this.doctor = new DoctorResponseDTO(appointment.getDoctor());
         this.medChart = new MedChartDTO(appointment.getMedChart());
         this.payment = new PaymentDTO(appointment.getPayment());
-        this.exams = appointment.getExams().stream().map(x -> new ExamDTO(x)).collect(Collectors.toSet());
+        this.exams = appointment.getExams().stream().map(ExamDTO::new).collect(Collectors.toSet());
     }
 
     public Long getId() {

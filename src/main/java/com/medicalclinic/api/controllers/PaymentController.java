@@ -28,4 +28,5 @@ public class PaymentController {
         var list = service.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
+
 }

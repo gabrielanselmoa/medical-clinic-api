@@ -24,6 +24,11 @@ public class Exam {
         this.type = type;
     }
 
+    public Exam( String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }

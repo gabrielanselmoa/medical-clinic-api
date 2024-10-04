@@ -1,11 +1,11 @@
 package com.medicalclinic.api.services;
 
 import com.medicalclinic.api.domain.address.Address;
-import com.medicalclinic.api.domain.appointment.Appointment;
-import com.medicalclinic.api.domain.appointment.AppointmentPatientTicketActive;
-import com.medicalclinic.api.domain.appointment.AppointmentRequestDTO;
-import com.medicalclinic.api.domain.appointment.AppointmentResponseDTO;
+import com.medicalclinic.api.domain.appointment.*;
 import com.medicalclinic.api.domain.doctor.Doctor;
+import com.medicalclinic.api.domain.exam.Exam;
+import com.medicalclinic.api.domain.exam.ExamDTO;
+import com.medicalclinic.api.domain.medChart.MedChart;
 import com.medicalclinic.api.domain.patient.Patient;
 import com.medicalclinic.api.domain.payment.Payment;
 import com.medicalclinic.api.domain.ticket.Ticket;
@@ -18,6 +18,8 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AppointmentService {
@@ -26,43 +28,59 @@ public class AppointmentService {
     private PersonRepository personRepository;
     private TicketRepository ticketRepository;
     private PaymentRepository paymentRepository;
+    private MedChartRepository medChartRepository;
+    private  ExamRepository examRepository;
 
     @Autowired
-    public AppointmentService(AppointmentRepository repository, PersonRepository personRepository, TicketRepository ticketRepository, PaymentRepository paymentRepository) {
+    public AppointmentService(AppointmentRepository repository, PersonRepository personRepository, TicketRepository ticketRepository, PaymentRepository paymentRepository, MedChartRepository medChartRepository, ExamRepository examRepository) {
         this.repository = repository;
         this.personRepository = personRepository;
         this.ticketRepository = ticketRepository;
         this.paymentRepository = paymentRepository;
+        this.medChartRepository = medChartRepository;
+        this.examRepository = examRepository;
     }
 
-    public Appointment findById(Long id){
+    public Appointment findById(Long id) {
         Optional<Appointment> appointment = repository.findById(id);
         return appointment.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
     }
 
-    public AppointmentResponseDTO createAppointment(AppointmentRequestDTO dto){
-        var appointment = new Appointment();
+    public AppointmentResponseDTO startAppointment(UUID ticketID, AppointmentRequestDTO dto) {
 
-        var patient = (Patient) personRepository.findById(dto.getPatientId()).orElseThrow(() -> new EntityNotFoundException("Patient not found!"));
-        var doctor = (Doctor) personRepository.findById(dto.getDoctorId()).orElseThrow(() -> new EntityNotFoundException("Doctor not found!"));
+        var ticket = ticketRepository.findById(ticketID).orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
 
-        var payment = new Payment();
-        var paymentSaved = paymentRepository.save(payment);
+        var appointment = getAppointment(ticket);
 
-        var ticket = new Ticket();
-        var ticketSaved = ticketRepository.save(ticket);
+        MedChart medChart = new MedChart();
 
-        appointment.setDate(LocalDate.now());
-        appointment.setDescription(dto.getDescription());
-        appointment.setPatient(patient);
-        appointment.setDoctor(doctor);
-        appointment.setTicket(ticketSaved);
-        appointment.setPayment(paymentSaved);
+        medChart.setSymptoms(dto.getMedChart().getSymptoms());
+        medChart.setHeight(dto.getMedChart().getHeight());
+        medChart.setWeight(dto.getMedChart().getWeight());
+        medChart.setPressure(dto.getMedChart().getPressure());
+
+        var medChartSaved = medChartRepository.save(medChart);
+
+        List<Exam> exams = dto.getExams().stream().map(item -> new Exam(item.getName(), item.getType())).collect(Collectors.toList());
+
+        List<Exam> examsListSaved = examRepository.saveAll(exams);
+
+        appointment.setMedChart(medChartSaved);
+        appointment.getExams().addAll(examsListSaved);
+        appointment.setAppointmentType(dto.getAppointmentType());
 
         return new AppointmentResponseDTO(appointment);
     }
 
-    public List<AppointmentPatientTicketActive>  findAllAppointmentsWithActiveTickets() {
+    private Appointment getAppointment(Ticket ticket) {
+
+        Appointment appointment = repository.findByTicket(ticket);
+
+        return appointment;
+    }
+
+
+    public List<AppointmentPatientTicketActive> findAllAppointmentsWithActiveTickets() {
 
         List<Appointment> appointments = repository.findAllAppointmentsWithActiveTickets();
 

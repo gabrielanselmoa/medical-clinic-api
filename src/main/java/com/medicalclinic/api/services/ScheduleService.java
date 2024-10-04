@@ -1,6 +1,7 @@
 package com.medicalclinic.api.services;
 
 import com.medicalclinic.api.domain.appointment.Appointment;
+import com.medicalclinic.api.domain.appointment.AppointmentType;
 import com.medicalclinic.api.domain.attendant.Attendant;
 import com.medicalclinic.api.domain.doctor.Doctor;
 import com.medicalclinic.api.domain.patient.Patient;
@@ -58,6 +59,7 @@ public class ScheduleService {
         appointment.setDate(LocalDate.now());
         appointment.setPatient(patient);
         appointment.setDoctor(doctor);
+        appointment.setAppointmentType(AppointmentType.WAITING);
         appointment.setAttendant(attendant);
         appointment.setTicket(ticketSaved);
         appointment.setPayment(paymentSaved);

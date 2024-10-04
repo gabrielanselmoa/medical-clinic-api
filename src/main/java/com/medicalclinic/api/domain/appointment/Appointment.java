@@ -44,13 +44,15 @@ public class Appointment {
     @OneToOne
     private Payment payment;
 
-    @OneToMany
+    @ManyToMany
     private Set<Exam> exams = new HashSet<>();
+
+    private AppointmentType appointmentType;
 
     public Appointment() {
     }
 
-    public Appointment(Long id, LocalDate date, String description, Patient patient, Doctor doctor, Attendant attendant, MedChart medChart, Ticket ticket, Payment payment, Set<Exam> exams) {
+    public Appointment(Long id, LocalDate date, String description, Patient patient, Doctor doctor, Attendant attendant, MedChart medChart, Ticket ticket, Payment payment, Set<Exam> exams, AppointmentType appointmentType) {
         this.id = id;
         this.date = date;
         this.description = description;
@@ -61,6 +63,7 @@ public class Appointment {
         this.ticket = ticket;
         this.payment = payment;
         this.exams = exams;
+        this.appointmentType = appointmentType;
     }
 
     public Long getId() {
@@ -139,6 +142,13 @@ public class Appointment {
         return exams;
     }
 
+    public AppointmentType getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(AppointmentType appointmentType) {
+        this.appointmentType = appointmentType;
+    }
 
     @Override
     public boolean equals(Object o) {
