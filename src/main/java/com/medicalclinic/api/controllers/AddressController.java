@@ -1,6 +1,8 @@
 package com.medicalclinic.api.controllers;
 
 import com.medicalclinic.api.domain.address.Address;
+import com.medicalclinic.api.domain.address.AddressDTO;
+import com.medicalclinic.api.exceptions.EntityNotFoundException;
 import com.medicalclinic.api.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,9 +26,9 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Address> findById(@PathVariable Long id) {
-        Address obj = service.findById(id);
-        return ResponseEntity.ok().body(obj);
+    public ResponseEntity<AddressDTO> findById(@PathVariable Long id) throws EntityNotFoundException {
+        AddressDTO addressDTO = service.findById(id);
+        return ResponseEntity.ok().body(addressDTO);
     }
 
     @DeleteMapping("/{id}")

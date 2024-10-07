@@ -1,22 +1,20 @@
 package com.medicalclinic.api.services;
 
-import com.medicalclinic.api.domain.address.Address;
-import com.medicalclinic.api.domain.appointment.*;
-import com.medicalclinic.api.domain.doctor.Doctor;
+import com.medicalclinic.api.domain.appointment.Appointment;
+import com.medicalclinic.api.domain.appointment.AppointmentPatientTicketActive;
+import com.medicalclinic.api.domain.appointment.AppointmentRequestDTO;
+import com.medicalclinic.api.domain.appointment.AppointmentResponseDTO;
 import com.medicalclinic.api.domain.exam.Exam;
-import com.medicalclinic.api.domain.exam.ExamDTO;
 import com.medicalclinic.api.domain.medChart.MedChart;
-import com.medicalclinic.api.domain.patient.Patient;
-import com.medicalclinic.api.domain.payment.Payment;
 import com.medicalclinic.api.domain.ticket.Ticket;
 import com.medicalclinic.api.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,6 +40,13 @@ public class AppointmentService {
         this.examRepository = examRepository;
     }
 
+    @Transactional(readOnly = true)
+    public Page<AppointmentResponseDTO> findAll(Pageable pageable){
+        Page<Appointment> list = repository.findAll(pageable);
+        return list.map(x -> new AppointmentResponseDTO(x));
+    }
+
+    @Transactional(readOnly = true)
     public Appointment findById(Long id) {
         Optional<Appointment> appointment = repository.findById(id);
         return appointment.orElseThrow(() -> new EntityNotFoundException("Entity not found!"));
@@ -80,7 +85,6 @@ public class AppointmentService {
         return appointment;
     }
 
-
     public List<AppointmentPatientTicketActive> findAllAppointmentsWithActiveTickets() {
 
         List<Appointment> appointments = repository.findAllAppointmentsWithActiveTickets();
@@ -88,5 +92,10 @@ public class AppointmentService {
         return appointments.stream()
                 .map(AppointmentPatientTicketActive::new)
                 .toList();
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }

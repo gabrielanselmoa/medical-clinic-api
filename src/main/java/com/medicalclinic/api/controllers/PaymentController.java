@@ -1,16 +1,18 @@
 package com.medicalclinic.api.controllers;
 
 import com.medicalclinic.api.domain.payment.Payment;
+import com.medicalclinic.api.domain.payment.PaymentDTO;
 import com.medicalclinic.api.services.PaymentService;
 import com.medicalclinic.api.services.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/payment")
@@ -24,9 +26,15 @@ public class PaymentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Payment>> findAll(){
-        var list = service.findAll();
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    public ResponseEntity<Page<PaymentDTO>> findAll(Pageable pageable) {
+        Page<PaymentDTO> page = service.findAll(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(page);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

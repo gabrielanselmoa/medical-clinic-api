@@ -23,24 +23,34 @@ public class PersonController {
     public PersonController(PersonService service) {
         this.service = service;
     }
+
     @PostMapping("/doctor")
     public ResponseEntity<DoctorResponseDTO> createDoctor(@RequestBody DoctorRequestDTO dto){
         var res = service.createDoctor(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
+
     @PostMapping("/patient")
     public ResponseEntity<PatientResponseDTO> createPatient(@RequestBody PatientRequestDTO dto){
         var res = service.createPatient(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
+
     @PostMapping("/attendant")
     public ResponseEntity<AttendantResponseDTO> createAttendant(@RequestBody AttendantRequestDTO dto){
         var res = service.createAttendant(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(res);
     }
+
     @GetMapping("/attendant/{id}")
     public ResponseEntity<AttendantResponseDTO> findById(@PathVariable Long id){
         var attendant = service.findAttendantById(id);
         return ResponseEntity.status(HttpStatus.OK).body(attendant);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -36,5 +36,10 @@ public class AppointmentController {
         return ResponseEntity.status(HttpStatus.OK).body(app);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

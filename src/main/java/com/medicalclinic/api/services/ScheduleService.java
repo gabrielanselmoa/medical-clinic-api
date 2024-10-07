@@ -12,9 +12,9 @@ import com.medicalclinic.api.repositories.PaymentRepository;
 import com.medicalclinic.api.repositories.PersonRepository;
 import com.medicalclinic.api.repositories.TicketRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 

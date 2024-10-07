@@ -21,6 +21,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -131,5 +132,10 @@ public class PersonService {
         var attendantSaved = personRepository.save(attendant);
 
         return new AttendantResponseDTO(attendantSaved);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        personRepository.deleteById(id);
     }
 }
