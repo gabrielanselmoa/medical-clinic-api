@@ -12,6 +12,7 @@ import com.medicalclinic.api.domain.ticket.Ticket;
 import com.medicalclinic.api.repositories.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
