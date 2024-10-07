@@ -10,33 +10,18 @@ import java.util.Set;
 
 public class AppointmentRequestDTO {
 
-    private LocalDate date;
     private String description;
-
-    private Long patientId;
-    private Long doctorId;
     private MedChartDTO medChart;
-    private PaymentDTO payment;
     private Set<ExamDTO> exams = new HashSet<>();
+    private AppointmentType appointmentType;
 
     public AppointmentRequestDTO(){}
 
-    public AppointmentRequestDTO(LocalDate date, String description, Long patientId, Long doctorId, MedChartDTO medChart, PaymentDTO payment, Set<ExamDTO> exams) {
-        this.date = date;
+    public AppointmentRequestDTO(String description, MedChartDTO medChart, Set<ExamDTO> exams, AppointmentType appointmentType) {
         this.description = description;
-        this.patientId = patientId;
-        this.doctorId = doctorId;
         this.medChart = medChart;
-        this.payment = payment;
         this.exams = exams;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
+        this.appointmentType = appointmentType;
     }
 
     public String getDescription() {
@@ -47,21 +32,6 @@ public class AppointmentRequestDTO {
         this.description = description;
     }
 
-    public Long getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
-    }
-
-    public Long getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(Long doctorId) {
-        this.doctorId = doctorId;
-    }
 
     public MedChartDTO getMedChart() {
         return medChart;
@@ -71,15 +41,16 @@ public class AppointmentRequestDTO {
         this.medChart = medChart;
     }
 
-    public PaymentDTO getPayment() {
-        return payment;
-    }
-
-    public void setPayment(PaymentDTO payment) {
-        this.payment = payment;
-    }
 
     public Set<ExamDTO> getExams() {
         return exams;
+    }
+
+    public AppointmentType getAppointmentType() {
+        return appointmentType;
+    }
+
+    public void setAppointmentType(AppointmentType appointmentType) {
+        this.appointmentType = appointmentType;
     }
 }
