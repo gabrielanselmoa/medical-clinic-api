@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 public class ScheduleService {
@@ -40,6 +42,7 @@ public class ScheduleService {
 
         Payment payment = new Payment();
 
+        payment.setPaymentDate(LocalDate.now());
         payment.setType(schedule.getType());
         payment.setSubTotal(schedule.getSubTotal());
         payment.setDiscount(schedule.getDiscount());

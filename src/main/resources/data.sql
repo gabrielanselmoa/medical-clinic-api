@@ -41,11 +41,13 @@ VALUES
     ('f47ac10b-58cc-4372-a567-0e02b2c3d479', NOW(), '2024-12-31'),
     ('e09b41a4-3f1f-4e36-946d-540c3e6f91b1', NOW(), '2024-11-30');
 
--- Inserir dados na tabela Payment
-INSERT INTO Payment (id, type, status)
+INSERT INTO Payment (id, payment_date, type, sub_total, discount, total)
 VALUES
-    ('d42b40e3-3c22-4e09-8a0c-6f55d1bfe9bb', 'Credit Card', 'PENDING'),
-    ('b7c9e5f2-6d29-42d8-b3a6-8b885c9e2d0a', 'Debit Card', 'COMPLETED');
+    ('d42b40e3-3c22-4e09-8a0c-6f55d1bfe9bb', NOW(), 'Credit Card', 100.00, 10.00, 90.00),
+    ('b7c9e5f2-6d29-42d8-b3a6-8b885c9e2d0a', NOW() - INTERVAL '1 day', 'Debit Card', 50.00, 5.00, 45.00),
+    ('f47ac10b-58cc-4372-a567-0e02b2c3d479', NOW() - INTERVAL '2 days', 'PayPal', 75.00, 0.00, 75.00),
+    ('e09b41a4-3f1f-4e36-946d-540c3e6f91b1', NOW() - INTERVAL '3 days', 'Cash', 30.00, 2.00, 28.00),
+    ('e0a6c3b8-d3c5-4e5a-b1e2-b0e9c8d72e98', NOW() - INTERVAL '4 days', 'Bank Transfer', 200.00, 20.00, 180.00);
 
 -- Inserir dados na tabela Exam
 INSERT INTO Exam (name, type)

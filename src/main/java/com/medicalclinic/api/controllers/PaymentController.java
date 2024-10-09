@@ -2,6 +2,7 @@ package com.medicalclinic.api.controllers;
 
 import com.medicalclinic.api.domain.payment.Payment;
 import com.medicalclinic.api.domain.payment.PaymentDTO;
+import com.medicalclinic.api.domain.payment.PaymentSumDTO;
 import com.medicalclinic.api.services.PaymentService;
 import com.medicalclinic.api.services.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +31,12 @@ public class PaymentController {
     public ResponseEntity<Page<PaymentDTO>> findAll(Pageable pageable) {
         Page<PaymentDTO> page = service.findAll(pageable);
         return ResponseEntity.status(HttpStatus.OK).body(page);
+    }
+
+    @GetMapping(value = "/sum/{beginDate}/{finishDate}")
+    public ResponseEntity<PaymentSumDTO> getPaymentSumByDate(@PathVariable String beginDate, @PathVariable String finishDate){
+        PaymentSumDTO result = service.getPaymentSumByDate(beginDate, finishDate);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @DeleteMapping("/{id}")

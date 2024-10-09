@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -13,6 +16,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private LocalDate paymentDate;
     private String type;
     private BigDecimal subTotal;
     private BigDecimal discount;
@@ -24,8 +28,9 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(UUID id, String type, BigDecimal total, BigDecimal subTotal, BigDecimal discount, PaymentStatus status) {
+    public Payment(UUID id, LocalDate paymentDate, String type, BigDecimal subTotal, BigDecimal discount, BigDecimal total, PaymentStatus status) {
         this.id = id;
+        this.paymentDate = paymentDate;
         this.type = type;
         this.subTotal = subTotal;
         this.discount = discount;
@@ -39,6 +44,14 @@ public class Payment {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     public String getType() {

@@ -2,6 +2,7 @@ package com.medicalclinic.api.services;
 
 import com.medicalclinic.api.domain.payment.Payment;
 import com.medicalclinic.api.domain.payment.PaymentDTO;
+import com.medicalclinic.api.domain.payment.PaymentSumDTO;
 import com.medicalclinic.api.repositories.PaymentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,5 +40,14 @@ public class PaymentService {
     @Transactional
     public void delete(UUID id) {
         repository.deleteById(id);
+    }
+
+    @Transactional
+    public PaymentSumDTO getPaymentSumByDate(String beginDate, String finishDate){
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        LocalDate beginFormat = LocalDate.parse(beginDate);
+        LocalDate finishFormat = LocalDate.parse(finishDate);
+        Double result = repository.getPaymentSumByDate(beginFormat, finishFormat);
+        return new PaymentSumDTO(result);
     }
 }

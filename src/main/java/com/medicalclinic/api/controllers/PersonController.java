@@ -1,6 +1,5 @@
 package com.medicalclinic.api.controllers;
 
-import com.medicalclinic.api.domain.attendant.Attendant;
 import com.medicalclinic.api.domain.attendant.AttendantRequestDTO;
 import com.medicalclinic.api.domain.attendant.AttendantResponseDTO;
 import com.medicalclinic.api.domain.doctor.DoctorRequestDTO;

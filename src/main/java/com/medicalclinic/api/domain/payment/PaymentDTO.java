@@ -1,14 +1,14 @@
 package com.medicalclinic.api.domain.payment;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class PaymentDTO {
 
     private UUID id;
+    private LocalDate paymentDate;
     private String type;
     private BigDecimal subTotal;
     private BigDecimal discount;
@@ -18,8 +18,9 @@ public class PaymentDTO {
 
     public PaymentDTO(){}
 
-    public PaymentDTO(UUID id, String type, BigDecimal subTotal, BigDecimal discount, BigDecimal total, PaymentStatus status) {
+    public PaymentDTO(UUID id, LocalDate paymentDate, String type, BigDecimal subTotal, BigDecimal discount, BigDecimal total, PaymentStatus status) {
         this.id = id;
+        this.paymentDate = paymentDate;
         this.type = type;
         this.subTotal = subTotal;
         this.discount = discount;
@@ -29,6 +30,7 @@ public class PaymentDTO {
 
     public PaymentDTO(Payment payment) {
         this.id = payment.getId();
+        this.paymentDate = payment.getPaymentDate();
         this.type = payment.getType();
         this.subTotal = payment.getSubTotal();
         this.discount = payment.getDiscount();
@@ -42,6 +44,14 @@ public class PaymentDTO {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     public String getType() {
